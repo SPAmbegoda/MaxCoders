@@ -4,7 +4,7 @@ import java.awt.*;
 
 import robocode.*;
  
-public class MaxCoders extends BravoBot {
+public class MaxCoders extends CharlieBot {
 	
 	boolean peek; 
 	double moveAmount; 
@@ -17,11 +17,11 @@ public class MaxCoders extends BravoBot {
 		setBulletColor(Color.red);
 		setScanColor(Color.green);
 		
-		moveAmount = Math.max(getBattleFieldWidth(), getBattleFieldHeight());
+		moveAmount = Math.max(getBattleFieldWidth() -5, getBattleFieldHeight() -5);
 		
 		peek = false;
-
-		
+		back(moveAmount); 
+		turnGunRight(180);
 		turnLeft(getHeading() % 90);
 		ahead(moveAmount);
 		peek = true;
@@ -52,25 +52,28 @@ public class MaxCoders extends BravoBot {
 	public void onHitRobot(HitRobotEvent e) {
 		
 		if (e.getBearing() > -90 && e.getBearing() < 90) {
-			back(100);
+			
+			ahead(100);
 		} 
 		else {
-			ahead(100);
+			
+			back(100);
 		}
 	}
 	
 	
 	
-	public void onScannedRobot(ScannedRobotEvent e) {
+	public void onRobotDetected(ScannedRobotEvent e) {
+		turnGunRight(90);
 		if(getEnergy()>20)
 			fire(3);
 		else
 			fire(1);
 		
-		if (peek) {
-			scan();
-		}
-	}
+		 if (peek) {
+			 scan();
+		 }
+	 }
 	
 	/*public void onHitByBullet(HitByBulletEvent e) {
 		turnLeft(90 - e.getBearing());
