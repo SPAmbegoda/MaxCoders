@@ -17,11 +17,11 @@ public class MaxCoders extends CharlieBot {
 		setBulletColor(Color.red);
 		setScanColor(Color.green);
 		
-		moveAmount = Math.max(getBattleFieldWidth() -5, getBattleFieldHeight() -5);
+		moveAmount = Math.max(getBattleFieldWidth(), getBattleFieldHeight());
 		
 		peek = false;
-		back(moveAmount); 
-		turnGunRight(180);
+
+		
 		turnLeft(getHeading() % 90);
 		ahead(moveAmount);
 		peek = true;
@@ -52,32 +52,41 @@ public class MaxCoders extends CharlieBot {
 	public void onHitRobot(HitRobotEvent e) {
 		
 		if (e.getBearing() > -90 && e.getBearing() < 90) {
-			
-			ahead(100);
+			back(100);
 		} 
 		else {
-			
-			back(100);
+			ahead(100);
 		}
 	}
 	
 	
 	
 	public void onRobotDetected(ScannedRobotEvent e) {
-		turnGunRight(90);
-		if(getEnergy()>20)
-			fire(3);
+
+	//turnLeft(90 - e.getBearing());
+	//turnGunRight(180);
+	if(getEnergy()>20)
+		fire(3);
 		else
 			fire(1);
 		
-		 if (peek) {
-			 scan();
-		 }
-	 }
+		if (peek) {
+			scan();
+		}
+	}
 	
 	/*public void onHitByBullet(HitByBulletEvent e) {
 		turnLeft(90 - e.getBearing());
 	}*/
-	
-	
+	public void onHitByBullet(HitByBulletEvent e) {
+	//	turngunLeft(90 - e.getBearing());
+		turnGunRight(90);
+		fire(3);
+	}
+
+	public void onHitWall(HitWallEvent e) {
+		turnRight(90);
+		turnGunRight(90);
+		
+	}	
 }
