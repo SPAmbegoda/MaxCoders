@@ -1,14 +1,10 @@
-import robocode.DeathEvent;
-import robocode.Robot;
-import robocode.ScannedRobotEvent;
-import static robocode.util.Utils.normalRelativeAngleDegrees;
-import robocode.HitRobotEvent;
+
 
 import java.awt.*;
 
 import robocode.*;
  
-public class MaxCoders extends AlphaBot {
+public class MaxCoders extends BravoBot {
 	
 	boolean peek; 
 	double moveAmount; 
@@ -56,10 +52,10 @@ public class MaxCoders extends AlphaBot {
 	public void onHitRobot(HitRobotEvent e) {
 		
 		if (e.getBearing() > -90 && e.getBearing() < 90) {
-			back(50);
+			back(100);
 		} 
 		else {
-			ahead(50);
+			ahead(100);
 		}
 	}
 	
@@ -67,7 +63,7 @@ public class MaxCoders extends AlphaBot {
 	
 	public void onScannedRobot(ScannedRobotEvent e) {
 		if(getEnergy()>20)
-			fire(4);
+			fire(3);
 		else
 			fire(1);
 		
