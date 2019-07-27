@@ -28,7 +28,6 @@ public class MaxCoders extends AlphaBot {
 		
 		turnLeft(getHeading() % 90);
 		ahead(moveAmount);
-		// Turn the gun to turn right 90 degrees.
 		peek = true;
 		turnGunRight(90);
 		turnRight(90);
@@ -38,11 +37,11 @@ public class MaxCoders extends AlphaBot {
            // ahead(100);
             //turnGunRight(360);
 				peek = true;
-			// Move up the wall
+			
 			ahead(moveAmount);
-			// Don't look now
+			
 			peek = false;
-			// Turn to the next wall
+			
 			turnRight(90);
 			
            // back(100);
@@ -57,17 +56,20 @@ public class MaxCoders extends AlphaBot {
 	public void onHitRobot(HitRobotEvent e) {
 		
 		if (e.getBearing() > -90 && e.getBearing() < 90) {
-			back(100);
+			back(50);
 		} 
 		else {
-			ahead(100);
+			ahead(50);
 		}
 	}
 	
 	
 	
 	public void onScannedRobot(ScannedRobotEvent e) {
-		fire(2);
+		if(getEnergy()>20)
+			fire(4);
+		else
+			fire(1);
 		
 		if (peek) {
 			scan();
